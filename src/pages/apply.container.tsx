@@ -37,7 +37,7 @@ export const ApplyContainer: React.FC<Props> = (props) => {
         } else {
             history.push("/unqualified");
             setShowAlert(true);
-            setSessionCookie({"applied": true})
+            setSessionCookie({"CRWD_UNQUALIFIED": true})
         }
     };
 
@@ -45,7 +45,8 @@ export const ApplyContainer: React.FC<Props> = (props) => {
         isQualifiedApplicant(application).then((isValid) => applySucceeded(isValid, application));
     };
     const sessionCookie = getSessionCookie();
-    if (sessionCookie.applied) {
+    if (sessionCookie.CRWD_UNQUALIFIED) {
+        // previous qualification failed, can't retry
         console.log('redirecting');
         return <Redirect to="/unqualified"/>
     } else {
